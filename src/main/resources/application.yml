@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: trucktracking
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+  web:
+    resources:
+      static-locations: none
