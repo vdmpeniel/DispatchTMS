@@ -1,18 +1,16 @@
 package com.example.trucktracking.entities;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter
+@Setter
 public class CustomResponse {
     @Builder.Default
     String status = "OK";
 
-    @Builder.Default
-    String message = "Everything went well.";
-
+    String message;
     String body;
-
-
 }
