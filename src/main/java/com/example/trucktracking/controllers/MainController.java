@@ -3,9 +3,7 @@ import com.example.trucktracking.entities.CustomResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -20,8 +18,23 @@ public class MainController {
                 .message("Some Message")
                 .body("Hi there")
                 .build();
-
-
         return response;
+    }
+
+    @PostMapping(
+            value = "driver",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public CustomResponse updateDriverData(){
+        CustomResponse response = CustomResponse.builder()
+                .message("Some Message")
+                .body("Hi there")
+                .build();
+        return response;
+    }
+    @ExceptionHandler
+    public void exceptionHandler(Exception e){
+
     }
 }
