@@ -459,6 +459,139 @@ String method = request.getMethod();
 }
 
 
+# Logging:
+We can use Slf4j, Log4j, or Logback
+
+## Logging using a Logger instance:
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class MyClass {
+private static final Logger logger = LoggerFactory.getLogger(MyClass.class);
+
+    public void myMethod() {
+        logger.debug("This is a debug message");
+        logger.info("This is an info message");
+        logger.warn("This is a warn message");
+        logger.error("This is an error message");
+    }
+}
+
+## Logging with Lombok's @Slf4j
+You are going to need the dependency for project Lombok
+Use annotation @Slf4j
+log.info("Doing something...");
+log.debug("This is a debug message.");
+log.warn("This is a warning message.");
+log.error("This is an error message.");
+log.fatal("This is a fatal message.");
+
+## Configure the logging settings
+Put your configuration files in src/main/java/resources
+
+### Using Slf4j.properties:
+slf4j.rootLogger=DEBUG, CONSOLE
+slf4j.appender.CONSOLE=org.slf4j.impl.ConsoleAppender
+slf4j.appender.CONSOLE.layout=org.slf4j.impl.PatternLayout
+slf4j.appender.CONSOLE.layout.ConversionPattern=%date %level %logger %message%n
+
+### Using Slf4j.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="console" class="org.slf4j.impl.SLF4JLoggerFactory$ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+    </layout>
+  </appender>
+  <root level="DEBUG">
+    <appender-ref ref="console" />
+  </root>
+</configuration>
+
+
+### Using log4j.properties
+log4j.rootLogger=DEBUG, CONSOLE
+log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+log4j.appender.CONSOLE.layout.ConversionPattern=%date %level %logger %message%n
+
+### Using log4j.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </layout>
+    </appender>
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+    </root>
+</log4j:configuration>
+
+
+### Using logback.xml
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %level %logger %message%n</pattern>
+        </layout>
+    </appender>
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+
+###  Configure logback to log messages to multiple destinations using multiple appenders. Here is an example:
+<configuration>
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+    </layout>
+  </appender>
+  <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <file>log.txt</file>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+    </layout>
+  </appender>
+  <root level="DEBUG">
+    <appender-ref ref="console" />
+    <appender-ref ref="file" />
+  </root>
+</configuration>
+
+### Configure logback to log messages at different levels using different loggers. Here is an example:
+<configuration>
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+    </layout>
+  </appender>
+  <logger name="com.example" level="INFO">
+    <appender-ref ref="console" />
+  </logger>
+  <logger name="com.example.subpackage" level="DEBUG">
+    <appender-ref ref="console" />
+  </logger>
+  <root level="DEBUG">
+    <appender-ref ref="console" />
+  </root>
+</configuration>
+
+### Configure logback to log messages using different layouts. Here is an example:
+<configuration>
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+    </layout>
+  </appender>
+  <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <file>log.txt</file>
+    <layout class="ch.qos.logback.classic.Pattern
+
+
 # Using @Builder
 To be able to return JSON formated builder you need to add getters and setters
 
