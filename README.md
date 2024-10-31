@@ -38,5 +38,6 @@ This is the api endpoint: http://localhost:8081/api/v1/get_status
 To be able to return JSON formated builder you need to add getters and setters
 
 ### Jackson object mapping
+Include only non-null                                                                                               properties:
 ObjectMapper mapper = new ObjectMapper();
 System.out.println(mapper.writeValueAsString(response));
