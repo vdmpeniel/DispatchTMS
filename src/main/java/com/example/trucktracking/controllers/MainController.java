@@ -1,7 +1,6 @@
 package com.example.trucktracking.controllers;
-import com.example.trucktracking.entities.CustomResponse;
+import com.example.trucktracking.dto.CustomResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

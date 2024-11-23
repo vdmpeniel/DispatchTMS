@@ -1,4 +1,4 @@
-package com.example.trucktracking.entities;
+package com.example.trucktracking.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
